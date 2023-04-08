@@ -1,0 +1,88 @@
+<app-header></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="row">
+        <button mat-raised-button color="primary" style="width: 100px;font-family: 'K2D', sans-serif;"
+          (click)="backmain()">กลับ</button>
+      </div>
+      <div class="h3 font-weight-semibold text-center py-3">
+        {{ amountALL| currency}}</div>
+      <div class="row" style="margin-top: 20px;" *ngFor="let product of foodcart; let i  = index">
+        <div class="card">
+          <div class="card-header" style="display: flex;">
+            <div class="col-4" style="font-size: 24px;"> {{product.name}} </div>
+            <div class="col-8" style="justify-content: end;display: flex;font-size: 16px;"> ราคา {{product.price}}</div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-4">
+                <img [src]="product?.img" alt="" style="width: 250px;">
+              </div>
+              <div class="col-4">
+
+              </div>
+              <div class="col-4" style="justify-content: end;display: flex;">
+                <div class="row" style="height: 50px;width:50px;">
+                  <button type="button" class="btn btn-success mt-2" (click)="addAmount(product.fid,product.amount)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                  <span style="text-align:center;padding: 20px;font-size:20px;width: 200px;">
+                    {{product.amount}}
+                  </span>
+                  <button type="button" class="btn btn-danger mt-2" (click)="removeAmont(product.fid,product.amount)">
+                    <mat-icon>remove</mat-icon>
+                  </button>
+                </div>
+              </div>
+              <!-- <div class="row">
+                ${{ product.price| number :'1.2-2'}}
+              </div> -->
+              <div class="row-4">
+                <button (click)="removeFromCart(product.fid)" type="button" class="btn btn-danger mt-3">
+                  <!-- <mat-icon>restore_from_trash</mat-icon> -->
+                  <!-- <i class="fas fa-trash-alt"></i> -->
+                  <span class="material-symbols-outlined">
+                    delete
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="col-sm-4" style="margin-top: 10%;" *ngIf="isshowdetalamount">
+      <mat-card>
+        <mat-card-title>
+          <p style="text-align: center;margin-top: 5%px;margin-bottom: 0%;">Order</p>
+        </mat-card-title>
+        <hr>
+        <mat-card-content *ngFor="let product of foodcart;
+        let i  = index">
+          <div class="row">
+            <p class="col">
+              {{i+1}} {{product.name}} x {{product.amount}}
+            </p>
+            <p class="col" style="text-align: end;">{{product.price*product.amount}}</p>
+          </div>
+          <br>
+        </mat-card-content>
+        <mat-card-content style="text-align: end;">
+          <p>Amount {{amountALL | currency}}</p>
+        </mat-card-content>
+      </mat-card>
+      <br>
+      <button type="button" class="btn btn-success" style="width: 100%;" (click)="payment()">
+        PAY MENT
+      </button>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="!isshowdetalamount">
+  <h1 style="display: flex;justify-content: center;justify-items: center;margin-top: 50px;font-family: K2D;">ไม่มีสินค้าบนตะกร้า</h1>
+</div>

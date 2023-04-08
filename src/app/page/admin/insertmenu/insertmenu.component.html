@@ -1,0 +1,45 @@
+<div class="container" style="padding: 30px;">
+  <!-- <button mat-icon-button style="float: right; margin: 5px;" mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button> -->
+  <!-- <mat-dialog-content style="width: 700px;height: 600px;" class="container"> -->
+
+    <h1>เพิ่มข้อมูล</h1>
+    <mat-form-field style="width: 100%;">
+      <span class="material-symbols-outlined">
+        lunch_dining
+      </span>
+      <input matInput placeholder="ชื่ออาหาร" [(ngModel)]="this.name" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field style="width: 100%;">
+        <span class="material-symbols-outlined">
+          currency_bitcoin
+      </span>
+      <input matInput placeholder="ราคา" [(ngModel)]="this.price" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field style="width: 100%;">
+        <span class="material-symbols-outlined">
+          add_photo_alternate
+      </span>
+      <input matInput placeholder="รูปภาพ" [(ngModel)]="this.img" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field style="width: 100%;">
+        <span class="material-symbols-outlined">
+          restaurant_menu
+      </span>
+      <!-- <input matInput placeholder="ประเภทอาหาร" [(ngModel)]="this.type" [ngModelOptions]="{standalone: true}">
+             -->
+      <mat-select>
+        <mat-option class="txtmenu" (click)="allMenu()">ทั้งหมด</mat-option>
+        <mat-option class="txtmenu" #tid *ngFor="let types of type" [value]="types.tid" (click)="getMenu(tid.value)">
+          {{types.name}}
+        </mat-option>
+      </mat-select>
+      </mat-form-field>
+
+      <!-- <button mat-raised-button color="gray">Save</button>
+                                                  <button mat-raised-button color="gray" mat-dialog-close>Cancle</button> -->
+      <!-- </mat-dialog-content> -->
+      <button mat-raised-button color="gray" (click)="addFood()">Save</button>
+      <button mat-raised-button color="gray" mat-dialog-close>Cancel</button>
+      </div>

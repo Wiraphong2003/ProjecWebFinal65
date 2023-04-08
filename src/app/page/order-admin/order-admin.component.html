@@ -1,0 +1,96 @@
+
+
+<app-head-admin></app-head-admin>
+<div class="container">
+  <div class="row">
+    <button mat-raised-button color="primary" style="width: 100px;font-family: 'K2D', sans-serif;margin-bottom: 20px;"
+      (click)="backmain()">กลับ</button>
+  </div>
+
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+      *ngFor="let order of listOrder.reverse() let i  = index">
+      <mat-expansion-panel-header
+        style="background-color: rgb(240, 227, 211);height:70px;font-family: K2D; font-size: 16px;">
+        <mat-panel-title style="max-width: 50px;">
+          {{order.oid}}
+        </mat-panel-title>
+        <mat-panel-description>
+          <!-- Currently I am {{panelOpenState ? 'open' : 'closed'}} -->
+          <div class="row" style="justify-content: space-evenly;display: flex;width: 100%;">
+            <div class="col-6">
+              {{order.cname}}
+            </div>
+            <div class="col-2">
+              {{order.totalPrice+" $"}}
+            </div>
+            <div class="col-1" style="display: flex;">
+              <!-- {{order.status === "ส่งแล้ว"? color=="#32F234":""}} -->
+              {{order.status}}
+            </div>
+            <div class="col-1" style="display: flex;justify-content: start;" *ngIf="order.status == 'ยังไม่ส่ง';">
+              <div style=" width: 20px;
+                                            height: 20px;
+                                            background-color: rgb(255, 148, 27);
+                                            border: solid 1px rgb(248, 18, 10);
+                                            border-radius: 100%;">
+              </div>
+            </div>
+            <div class="col-1" style="display: flex;justify-content: start;" *ngIf="order.status == 'ส่งแล้ว';">
+              <div style=" width: 20px;
+                                          height: 20px;
+                                          background-color: aquamarine;
+                                          border: solid 1px darkcyan;
+                                          border-radius: 100%;">
+              </div>
+            </div>
+            <div class="col-2">
+              {{order.time}}
+            </div>
+          </div>
+
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row" style="margin-top: 20px;font-family: K2D; font-size: 16px;">
+        <div class="col-3">
+          <p>Address:{{" "+order.address}}</p>
+        </div>
+        <div class="col-3">
+          <p>Phone: {{order.cphone}}</p>
+        </div>
+        <div class="col-3">
+          <p>Detail: {{order.detail}}</p>
+        </div>
+      </div>
+      <div class="row" *ngFor="let food of Food let i  = index" style="font-family: K2D; font-size: 16px;">
+        <div class="col-4">
+          {{order.oid == food.oid ? food.name+" x "+food.amount :""}}
+        </div>
+        <div class="col-8" style="justify-content: end;display: flex;">
+          {{order.oid == food.oid ? food.price*food.amount +" $":""}}
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;font-family: K2D; font-size: 20px;">
+        <p style="justify-content: end;display: flex;">{{"ราคาสุทธิ: "+order.totalPrice+" $"}}</p>
+      </div>
+      <section *ngIf="order.status == 'ยังไม่ส่ง';">
+        <div class="example-button-row" style="justify-content: end; display: flex;">
+          <button mat-raised-button color="primary" (click)="confirm(order.oid)">จัดส่ง</button>
+        </div>
+      </section>
+      <!-- <div class="row" *ngIf="panelOpenState; ">
+          <p *ngFor="let food of spilt(order.cartSTR); let i  = index">
+            {{getdetailFood(food)}}
+          </p>
+        </div> -->
+      <!-- <div class="row" *ngIf="panelOpenState;">
+
+        </div> -->
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div class="container" *ngIf="isshowlist">
+  <h1 style="display: flex;justify-content: center;justify-items: center;margin-top: 50px;font-family: K2D;">
+    ไม่มีรายการสั่งชื้อ</h1>
+</div>

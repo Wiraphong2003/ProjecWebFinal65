@@ -1,0 +1,26 @@
+<mat-card class="card" style="width: 500px;">
+  <mat-card-header style=" font-family: 'K2D', sans-serif;">
+    <mat-card-title-group>
+      <mat-card-title style="font-size: 30px;font-family: 'K2D', sans-serif;">{{foodOj.name}}</mat-card-title>
+      <mat-card-subtitle style="font-family: 'K2D', sans-serif;">price {{foodOj.price}}</mat-card-subtitle>
+        <mat-form-field style="width: 150px;" appearance="outline">
+          <mat-label>Amount</mat-label>
+          <input matInput placeholder="Length" type="number" [(ngModel)]="amount" min="1" value="{{tempfood}}"
+            style="text-align: center;font-family: 'K2D', sans-serif;font-size: 24px;">
+        </mat-form-field>
+    </mat-card-title-group>
+  </mat-card-header>
+  <mat-card-actions style="padding: 10px;justify-content: space-between;font-family: 'K2D', sans-serif;">
+    <img mat-card-sm-image src={{foodOj.img}} style="justify-content: start;display: flex;">
+    <div class="row" style="margin-right: 10px;">
+      <button mat-stroked-button style="width: 40px;" (click)="addToCart(foodOj.fid)">
+        OK
+        </button>
+      <div style="width: 5px;"> </div>
+      <button mat-stroked-button style="width: 40px;" (click)="close()">
+        Cancle
+      </button>
+    </div>
+
+  </mat-card-actions>
+</mat-card>
